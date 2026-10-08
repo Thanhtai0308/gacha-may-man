@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Lật Thẻ Định Mệnh – trò chơi khởi động thuyết trình: mở gói thẻ gọi nhóm, trả lời câu hỏi, bục vinh danh.">
+<meta name="description" content="Gacha May Mắn – trò chơi khởi động thuyết trình: mở gói thẻ gọi nhóm, trả lời câu hỏi, bục vinh danh.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='14' y='6' width='72' height='88' rx='12' fill='%23a32237' stroke='%23e8c06a' stroke-width='6'/%3E%3Cpath d='M50 26l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z' fill='%23ffe7a3'/%3E%3C/svg%3E">
-<title>Lật Thẻ Định Mệnh</title>
+<title>Gacha May Mắn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap">
@@ -58,15 +58,14 @@
   --shadow:rgba(0,0,0,.5);
   --font-display:"Playfair Display",Georgia,"Times New Roman",serif;
   --font-body:"Be Vietnam Pro","Segoe UI",system-ui,-apple-system,sans-serif;
-  --drape:clamp(16px,4.5vw,76px);
-  --valance:clamp(24px,5vh,48px);
+  --drape:64px;
+  --valance:44px;
   color-scheme:dark;
 }
-@media (max-width:700px){:root{--drape:8px;--valance:22px}}
 *{box-sizing:border-box}
 [hidden]{display:none !important}
-html{height:100%}
-body{min-height:100%;display:flex;flex-direction:column;background:var(--night);color:var(--cream);font-family:var(--font-body);font-size:16px;line-height:1.5;overflow-x:hidden;font-variant-numeric:lining-nums}
+html{height:100%;overflow:hidden}
+body{height:100%;margin:0;overflow:hidden;display:flex;flex-direction:column;background:var(--night);color:var(--cream);font-family:var(--font-body);font-size:16px;line-height:1.5;overflow-x:hidden;font-variant-numeric:lining-nums}
 :focus-visible{outline:3px solid var(--glow);outline-offset:3px}
 button{font-family:inherit}
 
@@ -83,15 +82,14 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 @keyframes sway-r{from{transform:rotate(26deg)}to{transform:rotate(12deg)}}
 .floor{position:fixed;left:0;right:0;bottom:0;height:26vh;z-index:1;pointer-events:none;background:radial-gradient(55% 100% at 50% 100%,var(--floor-glow),transparent 72%)}
 #bgfx{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.drape{position:fixed;top:0;bottom:0;width:var(--drape);z-index:4;pointer-events:none;background-color:var(--velvet);background-image:linear-gradient(180deg,transparent 55%,var(--shadow)),repeating-linear-gradient(90deg,var(--velvet-deep) 0 4px,var(--velvet) 4px 14px,var(--velvet-light) 14px 19px,var(--velvet) 19px 28px,var(--velvet-deep) 28px 32px)}
+.drape{position:absolute;top:0;bottom:0;width:var(--drape);z-index:4;pointer-events:none;background-color:var(--velvet);background-image:linear-gradient(180deg,transparent 55%,var(--shadow)),repeating-linear-gradient(90deg,var(--velvet-deep) 0 4px,var(--velvet) 4px 14px,var(--velvet-light) 14px 19px,var(--velvet) 19px 28px,var(--velvet-deep) 28px 32px)}
 .drape-l{left:0;box-shadow:inset -3px 0 0 var(--gold-deep),8px 0 22px var(--shadow)}
 .drape-r{right:0;box-shadow:inset 3px 0 0 var(--gold-deep),-8px 0 22px var(--shadow)}
-.valance{position:fixed;top:0;left:0;right:0;height:var(--valance);z-index:5;pointer-events:none;background-color:var(--velvet);background-image:repeating-linear-gradient(90deg,var(--velvet-deep) 0 3px,var(--velvet) 3px 16px,var(--velvet-light) 16px 20px,var(--velvet) 20px 30px);border-bottom:3px solid var(--gold);box-shadow:0 6px 18px var(--shadow)}
+.valance{position:absolute;top:0;left:0;right:0;height:var(--valance);z-index:5;pointer-events:none;background-color:var(--velvet);background-image:repeating-linear-gradient(90deg,var(--velvet-deep) 0 3px,var(--velvet) 3px 16px,var(--velvet-light) 16px 20px,var(--velvet) 20px 30px);border-bottom:3px solid var(--gold);box-shadow:0 6px 18px var(--shadow)}
 .valance::after{content:"";position:absolute;left:0;right:0;top:100%;height:12px;background:radial-gradient(circle at 50% 0,var(--gold) 0 7px,transparent 8px) 0 0/34px 12px repeat-x}
-@media (max-width:700px){.drape{display:none}}
 
 /* App shell */
-.app{position:relative;z-index:3;flex:1;display:flex;flex-direction:column;gap:clamp(8px,1.6vh,16px);padding-inline:calc(var(--drape) + clamp(12px,2vw,28px));padding-block:calc(var(--valance) + 18px) 16px}
+.app{position:fixed;left:0;top:0;width:1440px;height:810px;transform-origin:0 0;z-index:3;display:flex;flex-direction:column;gap:12px;padding:calc(var(--valance) + 18px) calc(var(--drape) + 26px) 14px;container:app/size;overflow:hidden}
 .eyebrow{margin:0;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
 .hint{margin:0;color:var(--muted);font-size:.88rem;max-width:62ch;text-wrap:balance}
 .btn{font:600 .88rem/1 var(--font-body);color:var(--cream);background:var(--glass);border:1.5px solid var(--gold-deep);border-radius:999px;padding:.7em 1.1em;cursor:pointer}
@@ -109,24 +107,26 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 /* HUD */
 .hud{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}
 .brand{display:grid;gap:2px}
-.brand-title{font:900 clamp(1.3rem,2.4vw,1.9rem)/1.2 var(--font-display);background:linear-gradient(180deg,var(--glow),var(--gold) 60%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
-.board{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;flex:1 1 480px;max-width:780px}
+.brand-title{font:900 clamp(1.3rem,2.4cqw,1.9rem)/1.35 var(--font-display);padding:.06em .04em .1em;background:linear-gradient(180deg,var(--glow),var(--gold) 60%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.board{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:8px;flex:1 1 480px;max-width:820px}
+.board.many .slot{padding:4px 8px;gap:1px}
+.board.many .gift{width:13px;height:13px}
+.board.many .slot-name{font-size:.95rem}
 .hud-tools{display:flex;gap:6px;flex-wrap:wrap}
-@media (max-width:760px){.board{order:3;flex-basis:100%;grid-template-columns:repeat(2,minmax(0,1fr))}}
 .slot{padding:6px 10px;border:1.5px solid var(--line);border-radius:12px;background:var(--glass);display:grid;gap:3px;min-width:0;transition:border-color .3s,box-shadow .3s}
 .slot.active{border-color:var(--gold);box-shadow:0 0 18px var(--gold-soft)}
 .slot.empty{border-style:dashed;opacity:.7}
 .slot.queued{cursor:pointer}
 .slot.queued:hover{border-color:var(--gold)}
 .slot-top{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
-.slot-turn{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.slot-turn{font-size:.64rem;line-height:1.75;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .slot.queued .slot-turn{color:var(--gold)}
 .slot-pts{font-weight:700;font-size:.78rem;color:var(--gold);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
-.slot-name{font:900 1.05rem/1.2 var(--font-display)}
+.slot-name{font:900 1.05rem/1.3 var(--font-display)}
 .slot-empty{font-style:italic;color:var(--muted);font-size:.9rem}
 .gifts{display:inline-flex;gap:3px;align-items:center}
 .gift{display:block;width:16px;height:16px;flex:none}
-.gifts.lg .gift{width:clamp(22px,2.6vw,32px);height:clamp(22px,2.6vw,32px)}
+.gifts.lg .gift{width:clamp(22px,2.6cqw,32px);height:clamp(22px,2.6cqw,32px)}
 .gift .box{fill:var(--red)}
 .gift .rib{fill:var(--gold)}
 .gift.lost .box,.gift.lost .rib{fill:var(--lost)}
@@ -135,15 +135,15 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 @keyframes giftdrop{0%{transform:scale(1.7)}35%{transform:scale(1.7) rotate(-16deg)}100%{transform:none}}
 
 /* Scenes */
-.scenes{flex:1;display:flex;flex-direction:column}
-.scene{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,2vh,20px);text-align:center;min-height:0;padding-block:4px}
+.scenes{flex:1;display:flex;flex-direction:column;min-height:0}
+.scene{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,2cqh,20px);text-align:center;min-height:0;padding-block:4px}
 .scene-head{display:grid;gap:6px;justify-items:center}
-.scene-head h2{margin:0;font:900 clamp(1.8rem,4.2vw,3.2rem)/1.2 var(--font-display);text-wrap:balance;text-shadow:0 2px 18px var(--shadow)}
+.scene-head h2{margin:0;font:900 clamp(1.8rem,4.2cqw,3.2rem)/1.2 var(--font-display);text-wrap:balance;text-shadow:0 2px 18px var(--shadow)}
 .enter{animation:enter .55s ease-out}
 @keyframes enter{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
 
 /* Booster pack, drawn as one SVG so the foil, crimps and tear line stay crisp at any size */
-.pack-stage{position:relative;width:min(100%,1180px);height:clamp(320px,calc(100vh - 300px),860px)}
+.pack-stage{position:relative;width:min(100%,1240px);flex:1 1 auto;min-height:220px;max-height:660px}
 .pack-wrap{position:absolute;left:50%;top:50%;height:min(94%,580px);aspect-ratio:300/470;max-width:92%;transform:translate(-50%,-50%);z-index:1}
 .pack-wrap.clickable{cursor:pointer}
 .pack-aura{position:absolute;left:50%;top:50%;width:250%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;background:repeating-conic-gradient(from 0deg,var(--glow-soft) 0deg 5deg,transparent 5deg 15deg);-webkit-mask:radial-gradient(circle,#000 0%,transparent 58%);mask:radial-gradient(circle,#000 0%,transparent 58%);opacity:.22;animation:rayspin 32s linear infinite}
@@ -169,8 +169,8 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .pk-top{transform-box:fill-box;transform-origin:8% 100%}
 .pk-open,.pk-beam{opacity:0}
 .pack-stamp{position:absolute;top:47%;right:-9%;z-index:2;width:30%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;align-content:center;background:radial-gradient(circle at 38% 30%,var(--glow),var(--gold) 55%,var(--gold-deep));color:var(--ink);border:3px solid var(--cream);box-shadow:0 8px 18px var(--shadow);transform:rotate(12deg);pointer-events:none}
-.pack-stamp b{font:900 clamp(1.4rem,4.4vh,2.4rem)/1 var(--font-display)}
-.pack-stamp span{font:700 clamp(.6rem,1.6vh,.85rem)/1.2 var(--font-body);letter-spacing:.14em;text-transform:uppercase}
+.pack-stamp b{font:900 clamp(1.4rem,4.4cqh,2.4rem)/1 var(--font-display)}
+.pack-stamp span{font:700 clamp(.6rem,1.6cqh,.85rem)/1.2 var(--font-body);letter-spacing:.14em;text-transform:uppercase}
 .pack-stamp.pop{animation:stamp .45s cubic-bezier(.2,1.6,.4,1)}
 @keyframes stamp{from{transform:rotate(12deg) scale(2.4);opacity:0}to{transform:rotate(12deg) scale(1);opacity:1}}
 .pack.charge{animation:charge 1.9s ease-in forwards;filter:drop-shadow(0 26px 30px var(--shadow)) drop-shadow(0 0 40px var(--glow))}
@@ -195,10 +195,8 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 @keyframes packgone{from{transform:scale(1.08);opacity:1}to{transform:scale(.6) translateY(30%);opacity:0}}
 
 /* Cards */
-.deal{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:clamp(14px,2.4vw,36px);pointer-events:none}
-.card{pointer-events:auto;position:relative;width:clamp(120px,19vw,240px);max-height:96%;aspect-ratio:5/7;padding:0;border:none;background:none;cursor:pointer;perspective:1100px;container-type:inline-size;transition:transform .2s,opacity .3s,filter .3s;color:inherit}
-.deal.single .card{width:clamp(170px,30vh,300px)}
-@media (max-width:640px){.card{width:clamp(100px,40vw,160px)}}
+.deal{position:absolute;inset:0;z-index:2;display:flex;align-items:center;align-content:center;justify-content:center;flex-wrap:wrap;gap:var(--gap,28px);pointer-events:none}
+.card{pointer-events:auto;position:relative;width:var(--cw,200px);flex:none;aspect-ratio:5/7;padding:0;border:none;background:none;cursor:pointer;perspective:1100px;container-type:inline-size;transition:transform .2s,opacity .3s,filter .3s;color:inherit}
 .card:disabled{cursor:default}
 .card.ready:hover,.card.pickable:hover{transform:translateY(-10px) scale(1.03)}
 .card-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.3,1.3,.5,1)}
@@ -220,7 +218,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .card-front::after{content:"";position:absolute;inset:-30%;background:linear-gradient(115deg,transparent 42%,var(--glass-hi) 50%,transparent 58%);transform:translateX(-80%);animation:sheen 3s ease-in-out infinite;pointer-events:none}
 @keyframes sheen{0%,55%{transform:translateX(-80%)}100%{transform:translateX(80%)}}
 .card-front{padding-bottom:34%}
-.cf-label{font:900 1.2rem/1.3 var(--font-display);font-size:11cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--cream)}
+.cf-label{font:900 1.2rem/1.4 var(--font-display);font-size:11cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--cream)}
 .cf-num{font:900 6rem/1 var(--font-display);font-size:48cqw;color:var(--cream);text-shadow:0 0 22px var(--c),0 4px 0 var(--velvet-deep)}
 .cf-gifts{position:absolute;bottom:23%;left:0;right:0;display:flex;justify-content:center;gap:2px}
 .cf-gifts .gift{width:16px;height:16px;width:9cqw;height:9cqw}
@@ -234,8 +232,8 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .card.done .cf-ribbon{background:var(--panel);color:var(--cream);box-shadow:inset 0 0 0 2px var(--gold-deep)}
 
 /* Pack controls and bars */
-.gacha-controls{display:flex;gap:clamp(12px,2.4vw,28px);flex-wrap:wrap;justify-content:center}
-.pull{display:grid;justify-items:center;gap:3px;min-width:clamp(190px,20vw,270px);padding:.7em 1.6em .65em;border-radius:20px;border:2px solid var(--gold);cursor:pointer;font:900 clamp(1.25rem,2.3vw,1.8rem)/1.2 var(--font-display);box-shadow:0 6px 0 var(--pull-shadow),0 12px 24px var(--shadow);transition:transform .1s,filter .2s}
+.gacha-controls{display:flex;gap:clamp(12px,2.4cqw,28px);flex-wrap:wrap;justify-content:center}
+.pull{display:grid;justify-items:center;gap:3px;min-width:clamp(190px,20cqw,270px);padding:.7em 1.6em .65em;border-radius:20px;border:2px solid var(--gold);cursor:pointer;font:900 clamp(1.25rem,2.3cqw,1.8rem)/1.3 var(--font-display);box-shadow:0 6px 0 var(--pull-shadow),0 12px 24px var(--shadow);transition:transform .1s,filter .2s}
 .pull small{font:700 .74rem/1.2 var(--font-body);letter-spacing:.08em;text-transform:uppercase;opacity:.85}
 .pull-1{--pull-shadow:var(--gold-deep);background:linear-gradient(180deg,var(--glow),var(--gold) 55%,var(--gold-deep));color:var(--ink)}
 .pull-n{--pull-shadow:var(--pack-deep);background:linear-gradient(180deg,var(--pack-hi),var(--pack-light) 45%,var(--pack-deep));color:var(--cream);animation:pullglow 1.6s ease-in-out infinite}
@@ -244,13 +242,13 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .pull:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 var(--pull-shadow)}
 .pull:disabled{opacity:.45;cursor:default;animation:none}
 .reveal-bar{display:flex;align-items:center;justify-content:center;gap:12px 18px;flex-wrap:wrap}
-.reveal-msg{margin:0;font:900 clamp(1.25rem,2.6vw,1.9rem)/1.3 var(--font-display);color:var(--glow);animation:pulse 1.4s ease-in-out infinite}
+.reveal-msg{margin:0;font:900 clamp(1.25rem,2.6cqw,1.9rem)/1.3 var(--font-display);color:var(--glow);animation:pulse 1.4s ease-in-out infinite}
 @keyframes pulse{50%{transform:scale(1.08)}}
-.status{margin:0;font:700 clamp(1.1rem,2.2vw,1.5rem)/1.3 var(--font-display);text-wrap:balance}
+.status{margin:0;font:700 clamp(1.1rem,2.2cqw,1.5rem)/1.3 var(--font-display);text-wrap:balance}
 .status:focus{outline:none}
 
 /* Question */
-.q-panel{width:min(100%,1080px);background:var(--glass);border:2px solid var(--gold-deep);border-radius:22px;padding:clamp(16px,3vw,34px);display:grid;gap:clamp(12px,2vh,20px);text-align:left;box-shadow:0 20px 60px var(--shadow);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.q-panel{width:min(100%,1120px);background:var(--glass);border:2px solid var(--gold-deep);border-radius:22px;padding:calc(clamp(16px,3cqw,34px) * var(--qs,1));display:grid;gap:calc(clamp(12px,2cqh,20px) * var(--qs,1));text-align:left;box-shadow:0 20px 60px var(--shadow);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .q-panel.special{border-color:var(--glow);box-shadow:0 20px 60px var(--shadow),0 0 40px var(--glow-soft)}
 .q-panel.shake{animation:shake .55s ease-in-out}
 @keyframes shake{20%{transform:translateX(-12px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(4px)}}
@@ -258,22 +256,21 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .q-who{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap}
 .q-label{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
 .special .q-label{color:var(--glow)}
-.q-team{font:900 clamp(1.4rem,2.6vw,1.9rem)/1.2 var(--font-display)}
-.q-text{margin:0;font:700 clamp(1.4rem,3vw,2.4rem)/1.4 var(--font-display);text-wrap:balance}
-.q-note{margin:0;color:var(--muted);font-size:clamp(.95rem,1.6vw,1.1rem)}
+.q-team{font:900 clamp(1.4rem,2.6cqw,1.9rem)/1.3 var(--font-display)}
+.q-text{margin:0;font:700 calc(clamp(1.4rem,3cqw,2.4rem) * var(--qs,1))/1.42 var(--font-display);text-wrap:balance}
+.q-note{margin:0;color:var(--muted);font-size:clamp(.95rem,1.6cqw,1.1rem)}
 .timer-wrap{display:flex;align-items:center;gap:10px}
-.timer{position:relative;width:clamp(78px,9vw,112px);aspect-ratio:1}
+.timer{position:relative;width:clamp(78px,9cqw,112px);aspect-ratio:1}
 .timer svg{width:100%;height:100%;display:block}
 .ring-bg{fill:none;stroke:var(--panel);stroke-width:10}
 .ring{fill:none;stroke:var(--gold);stroke-width:10;stroke-linecap:round;stroke-dasharray:326.73;stroke-dashoffset:0}
-.timer-num{position:absolute;inset:0;display:grid;place-items:center;font:900 clamp(1.7rem,3.4vw,2.6rem)/1 var(--font-display);font-variant-numeric:lining-nums tabular-nums}
+.timer-num{position:absolute;inset:0;display:grid;place-items:center;font:900 clamp(1.7rem,3.4cqw,2.6rem)/1 var(--font-display);font-variant-numeric:lining-nums tabular-nums}
 .timer.low .ring,.timer.over .ring{stroke:var(--bad-light)}
 .timer.low .timer-num{color:var(--bad-light);animation:pulse 1s ease-in-out infinite}
 .timer-label{font-weight:700;color:var(--muted);font-size:.9rem}
 .timer-label.over{color:var(--bad-light)}
 .options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-@media (max-width:640px){.options{grid-template-columns:minmax(0,1fr)}}
-.opt{display:flex;align-items:center;gap:14px;width:100%;padding:14px 18px;border:2px solid var(--gold-deep);border-radius:18px;background:linear-gradient(180deg,var(--panel-hover),var(--panel));color:var(--cream);font:600 clamp(1.05rem,1.9vw,1.35rem)/1.4 var(--font-body);text-align:left;cursor:pointer;transition:transform .15s,border-color .2s,background .3s,opacity .3s,box-shadow .3s}
+.opt{display:flex;align-items:center;gap:14px;width:100%;padding:calc(14px * var(--qs,1)) 18px;border:2px solid var(--gold-deep);border-radius:18px;background:linear-gradient(180deg,var(--panel-hover),var(--panel));color:var(--cream);font:600 calc(clamp(1.05rem,1.9cqw,1.35rem) * var(--qs,1))/1.42 var(--font-body);text-align:left;cursor:pointer;transition:transform .15s,border-color .2s,background .3s,opacity .3s,box-shadow .3s}
 .opt:hover:not(:disabled){border-color:var(--gold);transform:translateY(-2px)}
 .opt:disabled{cursor:default}
 .opt-letter{flex:none;width:2.3em;height:2.3em;border-radius:50%;display:grid;place-items:center;font:900 1em/1 var(--font-display);border:2px solid var(--gold);background:var(--red);color:var(--cream)}
@@ -284,40 +281,40 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .opt.correct{background:var(--good);border-color:var(--good-light);color:var(--ink);animation:none;box-shadow:0 0 26px var(--good)}
 .opt.wrong{background:var(--bad);border-color:var(--bad-light);color:var(--cream);animation:none;opacity:.75;text-decoration:line-through}
 .opt.dim{opacity:.32}
-.feedback{margin:0;padding:10px 16px;border-radius:14px;border:2px solid var(--bad);background:var(--panel);color:var(--bad-light);font:900 clamp(1.05rem,2vw,1.4rem)/1.35 var(--font-display);animation:enter .35s ease-out}
+.feedback{margin:0;padding:10px 16px;border-radius:14px;border:2px solid var(--bad);background:var(--panel);color:var(--bad-light);font:900 clamp(1.05rem,2cqw,1.4rem)/1.35 var(--font-display);animation:enter .35s ease-out}
 .judge{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .hint-panel{border:2px solid var(--glow);border-radius:16px;padding:16px 20px;background:var(--panel);display:grid;gap:8px}
 .hint-panel h3{margin:0;font:900 1.35rem/1.25 var(--font-display);color:var(--glow)}
-.hint-panel ul{margin:0;padding-left:1.2em;display:grid;gap:6px;font-size:clamp(1rem,1.7vw,1.15rem)}
+.hint-panel ul{margin:0;padding-left:1.2em;display:grid;gap:6px;font-size:clamp(1rem,1.7cqw,1.15rem)}
 .hint-panel p{margin:0;color:var(--muted)}
 .q-result{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:16px;border:2px solid var(--line);background:var(--panel)}
 .q-result.good{border-color:var(--good)}
 .q-result.bad{border-color:var(--bad)}
-.q-result-title{margin:0;font:900 clamp(1.15rem,2.2vw,1.6rem)/1.35 var(--font-display)}
+.q-result-title{margin:0;font:900 clamp(1.15rem,2.2cqw,1.6rem)/1.35 var(--font-display)}
 .q-result.good .q-result-title{color:var(--good-light)}
 .q-result.bad .q-result-title{color:var(--bad-light)}
 .q-result-sub{margin:.25em 0 0;color:var(--muted)}
 
 /* Podium */
-.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:clamp(8px,1.6vw,18px);width:min(100%,880px)}
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:clamp(8px,1.6cqw,18px);width:min(100%,880px)}
 .place{display:grid;justify-items:center;align-content:end;gap:10px;min-width:0}
 .who{display:grid;justify-items:center;gap:5px;opacity:0;transform:translateY(24px) scale(.9);transition:opacity .5s,transform .6s cubic-bezier(.2,1.4,.4,1);min-width:0}
 .place.shown .who{opacity:1;transform:none}
-.crown{width:clamp(48px,6vw,72px);height:auto;fill:var(--gold);filter:drop-shadow(0 0 12px var(--glow-soft))}
+.crown{width:clamp(48px,6cqw,72px);height:auto;fill:var(--gold);filter:drop-shadow(0 0 12px var(--glow-soft))}
 .place.shown .crown{animation:crowndrop .8s .2s cubic-bezier(.2,1.6,.4,1) both}
 @keyframes crowndrop{from{transform:translateY(-60px) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
 .medal{width:2.4em;height:2.4em;border-radius:50%;display:grid;place-items:center;font:900 1.1rem/1 var(--font-display);color:var(--ink);border:3px solid var(--cream);box-shadow:0 4px 10px var(--shadow)}
 .p1 .medal{background:radial-gradient(circle at 35% 30%,var(--glow),var(--gold) 55%,var(--gold-deep))}
 .p2 .medal{background:radial-gradient(circle at 35% 30%,var(--silver-light),var(--silver) 55%,var(--silver-deep))}
 .p3 .medal{background:radial-gradient(circle at 35% 30%,var(--bronze-light),var(--bronze) 55%,var(--bronze-deep))}
-.who-name{font:900 clamp(1.3rem,3vw,2.3rem)/1.2 var(--font-display)}
-.p1 .who-name{color:var(--glow);font-size:clamp(1.6rem,3.8vw,2.9rem);text-shadow:0 0 22px var(--gold-soft)}
-.who-pts{font:900 clamp(1rem,1.8vw,1.25rem)/1.2 var(--font-display);color:var(--gold)}
+.who-name{font:900 clamp(1.3rem,3cqw,2.3rem)/1.3 var(--font-display)}
+.p1 .who-name{color:var(--glow);font-size:clamp(1.6rem,3.8cqw,2.9rem);text-shadow:0 0 22px var(--gold-soft)}
+.who-pts{font:900 clamp(1rem,1.8cqw,1.25rem)/1.2 var(--font-display);color:var(--gold)}
 .who-time{font-size:.82rem;color:var(--muted)}
-.block{width:100%;border-radius:12px 12px 0 0;display:grid;place-items:start center;padding-top:8px;font:900 clamp(1.9rem,min(6vw,6vh),4.4rem)/1 var(--font-display);color:var(--ink);box-shadow:inset 0 5px 0 var(--flash-core),inset 0 -14px 24px var(--shadow),0 18px 30px var(--shadow);transform-origin:50% 100%}
-.p1 .block{height:clamp(96px,19vh,250px);background:linear-gradient(180deg,var(--glow),var(--gold) 45%,var(--gold-deep))}
-.p2 .block{height:clamp(70px,13vh,180px);background:linear-gradient(180deg,var(--silver-light),var(--silver) 50%,var(--silver-deep))}
-.p3 .block{height:clamp(48px,8.5vh,130px);background:linear-gradient(180deg,var(--bronze-light),var(--bronze) 50%,var(--bronze-deep))}
+.block{width:100%;border-radius:12px 12px 0 0;display:grid;place-items:start center;padding-top:8px;font:900 clamp(1.9rem,min(6cqw,6cqh),4.4rem)/1 var(--font-display);color:var(--ink);box-shadow:inset 0 5px 0 var(--flash-core),inset 0 -14px 24px var(--shadow),0 18px 30px var(--shadow);transform-origin:50% 100%}
+.p1 .block{height:clamp(96px,19cqh,250px);background:linear-gradient(180deg,var(--glow),var(--gold) 45%,var(--gold-deep))}
+.p2 .block{height:clamp(70px,13cqh,180px);background:linear-gradient(180deg,var(--silver-light),var(--silver) 50%,var(--silver-deep))}
+.p3 .block{height:clamp(48px,8.5cqh,130px);background:linear-gradient(180deg,var(--bronze-light),var(--bronze) 50%,var(--bronze-deep))}
 .place.vacant .block{opacity:.35}
 .place.shown .block{animation:blockpop .5s ease-out}
 @keyframes blockpop{50%{transform:scaleY(1.06)}}
@@ -325,10 +322,10 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .last.shown{opacity:1;transform:none}
 .last-badge{width:3em;height:3em;border-radius:50%;display:grid;place-items:center;background:var(--lost);color:var(--cream);font:900 1rem/1 var(--font-display);border:2px solid var(--muted)}
 .last-info{display:grid;gap:4px;justify-items:start;text-align:left}
-.last .who-name{font-size:clamp(1.2rem,2.4vw,1.7rem)}
+.last .who-name{font-size:clamp(1.2rem,2.4cqw,1.7rem)}
 .last-quip{color:var(--muted);font-style:italic}
-.end-total{margin:0;font:700 clamp(1rem,1.8vw,1.25rem)/1.35 var(--font-display);color:var(--glow)}
-@media (max-height:860px){#sceneEnd{gap:8px}#sceneEnd .scene-head h2{font-size:clamp(1.6rem,5.6vh,2.6rem)}.crown{width:clamp(36px,5.5vh,60px)}.place{gap:6px}.who{gap:3px}.medal{width:2.1em;height:2.1em}.last{padding:8px 18px}.last-badge{width:2.6em;height:2.6em}}
+.end-total{margin:0;font:700 clamp(1rem,1.8cqw,1.25rem)/1.35 var(--font-display);color:var(--glow)}
+@container app (max-height:860px){#sceneEnd{gap:8px}#sceneEnd .scene-head h2{font-size:clamp(1.6rem,5.6cqh,2.6rem)}.crown{width:clamp(36px,5.5cqh,60px)}.place{gap:6px}.who{gap:3px}.medal{width:2.1em;height:2.1em}.last{padding:8px 18px}.last-badge{width:2.6em;height:2.6em}}
 
 /* Light flash and curtain transition */
 .flash{position:fixed;inset:0;z-index:40;pointer-events:none;opacity:0;transition:opacity .38s ease;background:radial-gradient(circle,var(--flash-core) 0%,var(--glow) 45%,var(--gold) 100%)}
@@ -345,7 +342,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 /* Settings drawer */
 .drawer-wrap{position:fixed;inset:0;z-index:60}
 .drawer-scrim{position:absolute;inset:0;background:var(--scrim)}
-.drawer{position:absolute;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--panel);border-left:2px solid var(--gold-deep);padding:calc(env(safe-area-inset-top,0px) + 18px) 18px calc(env(safe-area-inset-bottom,0px) + 24px);overflow-y:auto;display:grid;align-content:start;gap:18px;animation:slidein .3s ease-out}
+.drawer{position:absolute;top:0;right:0;bottom:0;width:min(540px,100%);background:var(--panel);border-left:2px solid var(--gold-deep);padding:calc(env(safe-area-inset-top,0px) + 18px) 18px calc(env(safe-area-inset-bottom,0px) + 24px);overflow-y:auto;display:grid;align-content:start;gap:18px;animation:slidein .3s ease-out}
 @keyframes slidein{from{transform:translateX(100%)}}
 .drawer-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .drawer-head h3{margin:0;font:900 1.6rem/1.2 var(--font-display)}
@@ -370,6 +367,41 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .confirm span{color:var(--muted);font-size:.9rem}
 
+/* Setup bar on the opening screen */
+.setup-bar{display:flex;align-items:center;justify-content:center;gap:10px 20px;flex-wrap:wrap;padding:7px 10px 7px 22px;border:1.5px solid var(--line);border-radius:999px;background:var(--glass)}
+.sb-item{display:flex;align-items:center;gap:10px}
+.sb-label{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.sb-sep{width:1.5px;height:28px;background:var(--line)}
+.stepper.sm{gap:6px}
+.stepper.sm .step{width:34px;height:34px;font-size:1.1rem}
+.stepper.sm output{font-size:1.35rem;min-width:2ch}
+.btn.sm{padding:.55em .95em;font-size:.84rem}
+
+/* Question editor */
+.qlist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.qitem{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px}
+.qitem.special{border-color:var(--gold-deep);background:var(--panel-hover)}
+.qi-num{grid-row:span 2;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.qi-text{font-size:.92rem;line-height:1.55;padding-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.qi-meta{grid-column:2;font-size:.78rem;color:var(--muted)}
+.qitem .btn{grid-column:3;grid-row:1 / span 2}
+.q-actions{display:flex;flex-wrap:wrap;gap:8px}
+.q-lock{margin:0;padding:8px 12px;border-radius:10px;background:var(--panel-hover);color:var(--glow);font-size:.88rem;line-height:1.5}
+.qform{display:grid;gap:12px;padding:14px;border:2px solid var(--gold);border-radius:14px;background:var(--panel-hover)}
+.qform h4{margin:0;font:900 1.15rem/1.35 var(--font-display);color:var(--glow)}
+.fl{display:grid;gap:6px;font-size:.84rem;color:var(--muted)}
+.qform textarea,.qform input[type=text],.qform input[type=number]{width:100%;font:500 .98rem/1.5 var(--font-body);color:var(--cream);background:var(--night);border:1.5px solid var(--gold-deep);border-radius:10px;padding:.5em .7em}
+.qform textarea{resize:vertical;min-height:4.6em}
+.qform input[type=number]{width:6.5em}
+.fopts{display:grid;gap:8px}
+.fopt{display:flex;align-items:center;gap:8px}
+.fopt input[type=radio]{width:20px;height:20px;accent-color:var(--good);flex:none;margin:0;cursor:pointer}
+.fopt-letter{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:900 .9rem/1 var(--font-display);border:1.5px solid var(--gold);background:var(--red);color:var(--cream)}
+.fnote{margin:0;font-size:.78rem;color:var(--muted)}
+.form-err{margin:0;color:var(--bad-light);font-weight:700;font-size:.9rem}
+.form-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.form-actions .btn-gold{padding:.7em 1.3em;font-size:.95rem}
+
 #fx{position:fixed;inset:0;width:100%;height:100%;z-index:70;pointer-events:none}
 
 @media (prefers-reduced-motion:reduce){
@@ -387,15 +419,14 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div class="hall" aria-hidden="true"></div>
 <div class="floor" aria-hidden="true"></div>
-<div class="drape drape-l" aria-hidden="true"></div>
-<div class="drape drape-r" aria-hidden="true"></div>
-<div class="valance" aria-hidden="true"></div>
-
-<div class="app">
+<div class="app" id="app">
+  <div class="drape drape-l" aria-hidden="true"></div>
+  <div class="drape drape-r" aria-hidden="true"></div>
+  <div class="valance" aria-hidden="true"></div>
   <header class="hud">
     <div class="brand">
       <span class="eyebrow">Trò chơi khởi động</span>
-      <span class="brand-title">Lật Thẻ Định Mệnh</span>
+      <span class="brand-title">Gacha May Mắn</span>
     </div>
     <ol class="board" id="board" aria-label="Điểm các nhóm"></ol>
     <div class="hud-tools">
@@ -406,7 +437,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
   </header>
 
   <main class="scenes">
-    <section class="scene" id="sceneGacha" aria-label="Mở gói định mệnh">
+    <section class="scene" id="sceneGacha" aria-label="Mở gói may mắn">
       <div class="pack-stage" id="stage">
         <div class="pack-wrap" id="packWrap">
           <span class="pack-aura"></span>
@@ -428,7 +459,28 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       </div>
       <p class="status" id="status" tabindex="-1" aria-live="polite">Còn 4 lượt gọi</p>
       <button class="btn-gold" id="toEndBtn" type="button" hidden>Lên bục vinh danh</button>
-      <p class="hint" id="gachaHint">Bấm vào gói, phím cách hoặc nút chuyển slide để mở gói ×1, phím 4 để mở gói nhiều thẻ. Lật thẻ xong, bấm vào nhóm nào thì câu hỏi của nhóm đó hiện ra.</p>
+      <div class="setup-bar" id="setupBar">
+        <div class="sb-item">
+          <span class="sb-label" id="sbLblGroups">Số nhóm trong lớp</span>
+          <div class="stepper sm">
+            <button class="step" type="button" data-step="groups" data-d="-1" aria-label="Bớt 1 nhóm trong lớp">−</button>
+            <output data-out="groups" aria-labelledby="sbLblGroups">8</output>
+            <button class="step" type="button" data-step="groups" data-d="1" aria-label="Thêm 1 nhóm trong lớp">+</button>
+          </div>
+        </div>
+        <span class="sb-sep" aria-hidden="true"></span>
+        <div class="sb-item">
+          <span class="sb-label" id="sbLblTarget">Số nhóm được gọi</span>
+          <div class="stepper sm">
+            <button class="step" type="button" data-step="target" data-d="-1" aria-label="Gọi ít hơn 1 nhóm">−</button>
+            <output data-out="target" aria-labelledby="sbLblTarget">4</output>
+            <button class="step" type="button" data-step="target" data-d="1" aria-label="Gọi thêm 1 nhóm">+</button>
+          </div>
+        </div>
+        <span class="sb-sep" aria-hidden="true"></span>
+        <button class="btn sm" id="sbQuestions" type="button">Câu hỏi: 4</button>
+      </div>
+      <p class="hint" id="gachaHint">Bấm vào gói hoặc phím cách để mở ×1, phím N để mở nhiều thẻ. Lật xong, bấm vào nhóm nào thì câu hỏi của nhóm đó hiện ra.</p>
     </section>
 
     <section class="scene" id="sceneQuestion" hidden aria-label="Câu hỏi">
@@ -461,12 +513,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
         </div>
         <div class="hint-panel" id="hintPanel" hidden>
           <h3>Gợi ý đáp án</h3>
-          <ul>
-            <li><b>Ý chính · Nước:</b> trung tâm dữ liệu dùng lượng lớn nước ngọt để làm mát máy chủ.</li>
-            <li><b>Ý phụ:</b> điện năng khổng lồ kéo theo phát thải CO₂; rác thải điện tử từ chip, GPU; khai thác khoáng sản để làm phần cứng.</li>
-            <li><b>Dẫn chứng:</b> nghiên cứu năm 2023 của ĐH California, Riverside ước tính GPT-3 tiêu tốn khoảng 500 ml nước cho mỗi 10–50 câu trả lời.</li>
-          </ul>
-          <p>Nêu được ý chính là đạt.</p>
+          <ul id="hintList"></ul>
         </div>
         <div class="q-result" id="qResult" hidden>
           <div>
@@ -504,7 +551,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 <div class="tc-wrap" id="tc" aria-hidden="true">
   <div class="tc tc-l"></div>
   <div class="tc tc-r"></div>
-  <div class="tc-mark" id="tcMark">Lật Thẻ Định Mệnh</div>
+  <div class="tc-mark" id="tcMark">Gacha May Mắn</div>
 </div>
 
 <div class="drawer-wrap" id="drawerWrap" hidden>
@@ -517,22 +564,52 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     <div class="field">
       <span class="field-label" id="lblGroups">Số nhóm trong lớp</span>
       <div class="stepper">
-        <button class="step" id="groupsMinus" type="button" data-step="groups" data-d="-1" aria-label="Bớt 1 nhóm">−</button>
-        <output id="groupCount" aria-labelledby="lblGroups">8</output>
-        <button class="step" id="groupsPlus" type="button" data-step="groups" data-d="1" aria-label="Thêm 1 nhóm">+</button>
+        <button class="step" type="button" data-step="groups" data-d="-1" aria-label="Bớt 1 nhóm">−</button>
+        <output data-out="groups" aria-labelledby="lblGroups">8</output>
+        <button class="step" type="button" data-step="groups" data-d="1" aria-label="Thêm 1 nhóm">+</button>
       </div>
     </div>
     <div class="field">
-      <span class="field-label" id="lblTarget">Số nhóm được gọi lên (tối đa 4, mỗi nhóm một câu)</span>
+      <span class="field-label" id="lblTarget">Số nhóm được gọi lên</span>
       <div class="stepper">
-        <button class="step" id="targetMinus" type="button" data-step="target" data-d="-1" aria-label="Gọi ít hơn 1 nhóm">−</button>
-        <output id="targetCount" aria-labelledby="lblTarget">4</output>
-        <button class="step" id="targetPlus" type="button" data-step="target" data-d="1" aria-label="Gọi thêm 1 nhóm">+</button>
+        <button class="step" type="button" data-step="target" data-d="-1" aria-label="Gọi ít hơn 1 nhóm">−</button>
+        <output data-out="target" aria-labelledby="lblTarget">4</output>
+        <button class="step" type="button" data-step="target" data-d="1" aria-label="Gọi thêm 1 nhóm">+</button>
       </div>
     </div>
     <div class="field">
       <span class="field-label">Nhóm trong gói thẻ. Bấm để bỏ ra, ví dụ nhóm đang thuyết trình.</span>
       <div class="tags" id="tags"></div>
+    </div>
+    <div class="field" id="qSection">
+      <span class="field-label" id="lblQuestions">Câu hỏi · mỗi nhóm được gọi nhận một câu, câu đặc biệt luôn dành cho nhóm cuối</span>
+      <p class="q-lock" id="qLock" hidden>Đang chơi dở nên chưa sửa được câu hỏi. Bấm “Chơi lại từ đầu” ở cuối bảng này để sửa.</p>
+      <ol class="qlist" id="qList"></ol>
+      <form class="qform" id="qForm" hidden novalidate>
+        <h4 id="qFormTitle">Sửa câu hỏi</h4>
+        <label class="fl">Nội dung câu hỏi<textarea id="fText" rows="3" maxlength="600"></textarea></label>
+        <div class="fl" id="fOptsWrap">
+          <span>Bốn đáp án · bấm vòng tròn để chọn đáp án đúng</span>
+          <div class="fopts">
+            <div class="fopt"><input type="radio" name="fAns" id="fAns0" value="0" aria-label="A là đáp án đúng"><span class="fopt-letter">A</span><input type="text" id="fOpt0" maxlength="200" placeholder="Đáp án A"></div>
+            <div class="fopt"><input type="radio" name="fAns" id="fAns1" value="1" aria-label="B là đáp án đúng"><span class="fopt-letter">B</span><input type="text" id="fOpt1" maxlength="200" placeholder="Đáp án B"></div>
+            <div class="fopt"><input type="radio" name="fAns" id="fAns2" value="2" aria-label="C là đáp án đúng"><span class="fopt-letter">C</span><input type="text" id="fOpt2" maxlength="200" placeholder="Đáp án C"></div>
+            <div class="fopt"><input type="radio" name="fAns" id="fAns3" value="3" aria-label="D là đáp án đúng"><span class="fopt-letter">D</span><input type="text" id="fOpt3" maxlength="200" placeholder="Đáp án D"></div>
+          </div>
+        </div>
+        <label class="fl" id="fHintWrap">Gợi ý đáp án cho người dẫn · mỗi dòng một ý, phần trước dấu “:” được in đậm<textarea id="fHint" rows="4"></textarea></label>
+        <label class="fl">Thời gian trả lời (giây)<input type="number" id="fTime" min="5" max="300" step="5"></label>
+        <p class="form-err" id="fErr" hidden></p>
+        <div class="form-actions">
+          <button class="btn-gold" type="submit">Lưu câu hỏi</button>
+          <button class="btn" type="button" id="fCancel">Hủy</button>
+          <button class="btn danger" type="button" id="fDelete">Xóa câu này</button>
+        </div>
+      </form>
+      <div class="q-actions">
+        <button class="btn" type="button" id="qAdd">+ Thêm câu ABCD</button>
+        <button class="btn" type="button" id="qRestore">Dùng lại bộ câu mặc định</button>
+      </div>
     </div>
     <div class="field">
       <span class="field-label">Chỉnh điểm từng nhóm (mỗi nhóm bắt đầu 5 điểm = 5 phần quà)</span>
@@ -553,30 +630,38 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 
 <script>
 (() => {
-  const TAU = Math.PI * 2, KEY = 'lat-the-dinh-menh-v1', START = 5, MAXQ = 4, SPECIAL = 3;
-  const TITLE = 'Lật Thẻ Định Mệnh';
+  const TAU = Math.PI * 2, KEY = 'gacha-may-man-v1', START = 5, SPECIAL = 'special';
+  const MAX_GROUPS = 30, MAX_TARGET = 10, MAX_MC = 40, BASE_W = 1440, BASE_H = 810;
+  const TITLE = 'Gacha May Mắn';
   const CIRC = 326.73;
   const reduced = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const $ = id => document.getElementById(id);
   const fmtTime = s => s.toFixed(1).replace('.', ',');
 
-  /* Question bank. Answer letters are kept encoded so nothing gives them away on screen. The open question (index 3) always goes to the last group. */
-  const QUESTIONS = [
-    { type: 'mc', time: 15,
-      text: 'Đạo đức là tập hợp các nguyên tắc, quy tắc, _____ xã hội nhằm điều chỉnh, đánh giá hành vi của con người đối với bản thân và trong quan hệ với người khác, với xã hội.',
-      opts: ['Tiêu chuẩn', 'Chuẩn mực', 'Trách nhiệm', 'Hành vi'] },
-    { type: 'mc', time: 15,
-      text: 'Đâu KHÔNG phải là một cấp độ nghĩa vụ trong mô hình Tháp Trách nhiệm xã hội (CSR)?',
-      opts: ['Nghĩa vụ nhân văn', 'Nghĩa vụ pháp lý', 'Nghĩa vụ chính trị', 'Nghĩa vụ kinh tế'] },
-    { type: 'mc', time: 15,
-      text: 'Trong các bước nhận diện vấn đề đạo đức, bước số 4 yêu cầu doanh nghiệp phải thực hiện nội dung nào sau đây?',
-      opts: ['Xác định mức độ của vấn đề đạo đức', 'Xác định những người liên quan đến tình huống đạo đức', 'Xác định bản chất của vấn đề', 'Xác định quan điểm, triết lý, mối quan tâm, mong muốn của họ'] },
-    { type: 'open', time: 60,
-      text: 'Môi trường đang gánh chịu cái giá vô hình nào cho sự bùng nổ của AI?' }
-  ];
-  const KEYS = atob('QkNB');
-  const ansIndex = qi => 'ABCD'.indexOf(KEYS[qi]);
+  /* Default question bank. The presenter can edit it in Settings; the special open question always goes to the last group called. */
+  const DEFAULT_BANK = {
+    mc: [
+      { id: 'q1', type: 'mc', time: 15, ans: 1,
+        text: 'Đạo đức là tập hợp các nguyên tắc, quy tắc, _____ xã hội nhằm điều chỉnh, đánh giá hành vi của con người đối với bản thân và trong quan hệ với người khác, với xã hội.',
+        opts: ['Tiêu chuẩn', 'Chuẩn mực', 'Trách nhiệm', 'Hành vi'] },
+      { id: 'q2', type: 'mc', time: 15, ans: 2,
+        text: 'Đâu KHÔNG phải là một cấp độ nghĩa vụ trong mô hình Tháp Trách nhiệm xã hội (CSR)?',
+        opts: ['Nghĩa vụ nhân văn', 'Nghĩa vụ pháp lý', 'Nghĩa vụ chính trị', 'Nghĩa vụ kinh tế'] },
+      { id: 'q3', type: 'mc', time: 15, ans: 0,
+        text: 'Trong các bước nhận diện vấn đề đạo đức, bước số 4 yêu cầu doanh nghiệp phải thực hiện nội dung nào sau đây?',
+        opts: ['Xác định mức độ của vấn đề đạo đức', 'Xác định những người liên quan đến tình huống đạo đức', 'Xác định bản chất của vấn đề', 'Xác định quan điểm, triết lý, mối quan tâm, mong muốn của họ'] }
+    ],
+    special: { id: SPECIAL, type: 'open', time: 60,
+      text: 'Môi trường đang gánh chịu cái giá vô hình nào cho sự bùng nổ của AI?',
+      hint: [
+        'Ý chính · Nước: trung tâm dữ liệu dùng lượng lớn nước ngọt để làm mát máy chủ.',
+        'Ý phụ: điện năng khổng lồ kéo theo phát thải CO₂; rác thải điện tử từ chip, GPU; khai thác khoáng sản để làm phần cứng.',
+        'Dẫn chứng: nghiên cứu năm 2023 của ĐH California, Riverside ước tính GPT-3 tiêu tốn khoảng 500 ml nước cho mỗi 10–50 câu trả lời.',
+        'Chấm điểm: nêu được ý chính là đạt.'
+      ] }
+  };
+  const cloneBank = b => JSON.parse(JSON.stringify(b));
   const CAP_COLORS = ['#ff4d6d', '#ffb703', '#3a86ff', '#06d6a0', '#8338ec', '#fb5607', '#00b4d8', '#ff006e', '#5cc96b', '#e9c46a', '#4361ee', '#c77dff'];
   const capColor = g => CAP_COLORS[(g - 1) % CAP_COLORS.length];
   const CROWN = '<svg class="crown" viewBox="0 0 64 40" aria-hidden="true"><path d="M4 36 L8 12 L21 24 L32 6 L43 24 L56 12 L60 36 Z"/><circle cx="8" cy="10" r="4"/><circle cx="32" cy="5" r="4"/><circle cx="56" cy="10" r="4"/></svg>';
@@ -602,18 +687,37 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
   function defaults(keep) {
     const k = keep || {};
     return { groupCount: k.groupCount || 8, excluded: (k.excluded || []).slice(), target: k.target || 4, picked: [],
-             mcOrder: shuffle([0, 1, 2]), sound: k.sound !== false, scene: 'gacha', active: -1 };
+             bank: cloneBank(k.bank || DEFAULT_BANK), sound: k.sound !== false, scene: 'gacha', active: -1 };
   }
   const newPick = (g, batch) => ({ g, batch, points: START, q: null, ord: null, result: null, choice: null, wrong: [], startedAt: null, time: null });
   function clampInt(v, min, max, fb) { v = Number(v); return Number.isFinite(v) ? Math.min(max, Math.max(min, Math.round(v))) : fb; }
+  const txt = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
+  function sanitizeBank(b) {
+    const d = cloneBank(DEFAULT_BANK);
+    if (!b || typeof b !== 'object') return d;
+    const mc = Array.isArray(b.mc) ? b.mc
+      .filter(q => q && txt(q.text, 600) && Array.isArray(q.opts) && q.opts.length === 4 && q.opts.every(o => txt(o, 200)) && Number.isInteger(q.ans) && q.ans >= 0 && q.ans < 4)
+      .slice(0, MAX_MC)
+      .map((q, i) => ({ id: txt(q.id, 40) || 'q' + i, type: 'mc', time: clampInt(q.time, 5, 300, 15), ans: q.ans, text: txt(q.text, 600), opts: q.opts.map(o => txt(o, 200)) })) : d.mc;
+    const ids = new Set();
+    mc.forEach((q, i) => { if (ids.has(q.id) || q.id === SPECIAL) q.id = `q${i}x${randInt(1e6)}`; ids.add(q.id); });
+    const sp = b.special;
+    const special = sp && txt(sp.text, 600)
+      ? { id: SPECIAL, type: 'open', time: clampInt(sp.time, 5, 300, 60), text: txt(sp.text, 600),
+          hint: Array.isArray(sp.hint) ? sp.hint.map(h => txt(h, 400)).filter(Boolean).slice(0, 12) : [] }
+      : d.special;
+    return { mc, special };
+  }
   function sanitize(s) {
     const d = defaults();
     if (!s || typeof s !== 'object') return d;
+    const bank = sanitizeBank(s.bank);
+    const validQ = id => id === SPECIAL || bank.mc.some(m => m.id === id);
     const picked = Array.isArray(s.picked) ? s.picked
-      .filter(p => p && Number.isInteger(p.g) && p.g >= 1 && p.g <= 12).slice(0, MAXQ)
+      .filter(p => p && Number.isInteger(p.g) && p.g >= 1 && p.g <= MAX_GROUPS).slice(0, MAX_TARGET)
       .map(p => ({ g: p.g, batch: Number.isInteger(p.batch) ? p.batch : 1,
                    points: clampInt(p.points, 0, START, START),
-                   q: Number.isInteger(p.q) && p.q >= 0 && p.q < MAXQ ? p.q : null,
+                   q: typeof p.q === 'string' && validQ(p.q) ? p.q : null,
                    ord: Number.isInteger(p.ord) ? p.ord : null,
                    result: p.result === 'right' || p.result === 'wrong' ? p.result : null,
                    choice: Number.isInteger(p.choice) ? p.choice : null,
@@ -622,14 +726,14 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
                    time: Number.isFinite(p.time) ? p.time : null })) : [];
     const seen = new Set();
     picked.forEach(p => { if (p.q != null) { if (seen.has(p.q)) { p.q = null; p.ord = null; } else seen.add(p.q); } if (p.q == null) p.result = null; });
-    const groupCount = Math.max(clampInt(s.groupCount, 2, 12, d.groupCount), ...picked.map(p => p.g), 2);
-    const okOrder = Array.isArray(s.mcOrder) && s.mcOrder.length === 3 && [0, 1, 2].every(x => s.mcOrder.includes(x));
+    const groupCount = Math.max(clampInt(s.groupCount, 2, MAX_GROUPS, d.groupCount), ...picked.map(p => p.g), 2);
+    const maxT = Math.max(1, Math.min(MAX_TARGET, bank.mc.length + 1, groupCount));
     const out = {
       groupCount,
       excluded: Array.isArray(s.excluded) ? s.excluded.filter(g => Number.isInteger(g) && g >= 1 && g <= groupCount) : [],
-      target: Math.min(MAXQ, Math.max(clampInt(s.target, 1, MAXQ, d.target), picked.length)),
+      target: Math.max(picked.length, Math.min(maxT, clampInt(s.target, 1, MAX_TARGET, d.target))),
       picked,
-      mcOrder: okOrder ? s.mcOrder.slice() : d.mcOrder,
+      bank,
       sound: s.sound !== false,
       scene: ['gacha', 'question', 'end'].includes(s.scene) ? s.scene : 'gacha',
       active: Number.isInteger(s.active) ? s.active : -1
@@ -657,16 +761,23 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
   const pendingIndex = () => state.picked.findIndex(p => p.result == null);
   const totalPoints = () => state.picked.reduce((s, p) => s + p.points, 0);
   const canPull = () => phase === 'idle' && !busy && state.scene === 'gacha' && allFinished() && moreToPlay();
-  const multiCount = () => Math.min(slotsLeft(), activeGroups().length);
-  const qOf = p => (p.q != null ? QUESTIONS[p.q] : null);
+  const multiCount = () => Math.min(slotsLeft(), activeGroups().length, MAX_TARGET);
+  const getQ = id => (id === SPECIAL ? state.bank.special : state.bank.mc.find(m => m.id === id) || null);
+  const qOf = p => (p.q != null ? getQ(p.q) : null);
+  const maxTarget = () => Math.max(1, Math.min(MAX_TARGET, state.bank.mc.length + 1, state.groupCount));
 
-  /* Which question a group gets when it is chosen: the three multiple-choice questions in shuffled order, the open question for the last group. */
+  /* Which question a group gets when it is clicked: a random unused multiple-choice question, or the special question for the last group. */
   function assignQuestion(p) {
     if (p.q != null) return;
     const assigned = state.picked.filter(x => x.q != null).length;
     const unassigned = state.picked.filter(x => x.q == null).length;
     const isLast = assigned >= state.target - 1 || (!moreToPlay() && unassigned === 1);
-    p.q = isLast ? SPECIAL : state.mcOrder[Math.min(assigned, 2)];
+    const used = new Set(state.picked.map(x => x.q).filter(Boolean));
+    const pool = state.bank.mc.filter(m => !used.has(m.id));
+    const specialFree = !used.has(SPECIAL);
+    if ((isLast || !pool.length) && specialFree) p.q = SPECIAL;
+    else if (pool.length) p.q = pool[randInt(pool.length)].id;
+    else p.q = state.bank.mc.length ? state.bank.mc[randInt(state.bank.mc.length)].id : SPECIAL;
     p.ord = assigned + 1;
   }
 
@@ -781,8 +892,8 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     <rect x="0" y="66" width="300" height="96" fill="url(#pkBand)"/>
     <rect x="20" y="69" width="260" height="2" fill="url(#pkGoldH)"/>
     <rect x="20" y="157" width="260" height="2" fill="url(#pkGoldH)"/>
-    <text class="pk-t1" x="150" y="98" text-anchor="middle">LẬT THẺ</text>
-    <text class="pk-t2" x="150" y="143" text-anchor="middle">ĐỊNH MỆNH</text>
+    <text class="pk-t1" x="150" y="98" text-anchor="middle">GACHA</text>
+    <text class="pk-t2" x="150" y="145" text-anchor="middle">MAY MẮN</text>
     <ellipse cx="150" cy="256" rx="84" ry="86" style="fill:var(--glow)" opacity=".32" filter="url(#pkSoft)"/>
     <path d="M78,318 L222,318 L268,366 L32,366 Z" fill="url(#pkSpill)" opacity=".45"/>
     ${sideCard(-18)}
@@ -1046,6 +1157,21 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
   }
 
   /* ---------- Gacha scene modes ---------- */
+  /* Card size from the free stage area: one row up to 5 cards, two rows beyond, never larger than the stage. */
+  function sizeDeal(n) {
+    const deal = $('deal'), stage = $('stage');
+    const W = stage.clientWidth, H = stage.clientHeight;
+    if (!n || !W || !H) return;
+    const rows = n <= 5 ? 1 : 2, per = Math.ceil(n / rows);
+    const gap = rows > 1 ? 22 : 30;
+    const byW = (W - gap * (per - 1)) / per;
+    const byH = ((H - gap * (rows - 1)) / rows) * 5 / 7;
+    const cw = Math.max(70, Math.floor(Math.min(byW, byH, n === 1 ? 290 : 250) * (rows > 1 ? .92 : .97)));
+    deal.style.setProperty('--cw', cw + 'px');
+    deal.style.setProperty('--gap', gap + 'px');
+    const rowW = per * cw + (per - 1) * gap;
+    deal.style.paddingInline = Math.max(0, Math.floor((W - rowW) / 2) - 1) + 'px';
+  }
   function resetPackStage() {
     phase = 'idle';
     flipState = null;
@@ -1073,7 +1199,8 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     $('gachaHint').hidden = true;
     statusEl.hidden = true;
     const deal = $('deal');
-    deal.classList.toggle('single', items.length === 1);
+    sizeDeal(items.length);
+    $('setupBar').hidden = true;
     let firstPending = null;
     items.forEach(({ p, i }, k) => {
       const pending = p.result == null;
@@ -1099,7 +1226,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       setTimeout(dealSound, delay);
       if (!b.animate || reduced) return;
       const cr = b.getBoundingClientRect();
-      const dx = px - (cr.left + cr.width / 2), dy = py - (cr.top + cr.height / 2);
+      const dx = (px - (cr.left + cr.width / 2)) / frameScale, dy = (py - (cr.top + cr.height / 2)) / frameScale;
       const r0 = (Math.random() - .5) * 60;
       b.animate([
         { transform: `translate(${dx}px, ${dy}px) scale(.3) rotate(${r0}deg)`, opacity: 0 },
@@ -1142,7 +1269,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     await wait(reduced ? 80 : 750);
     const deal = $('deal');
     deal.innerHTML = '';
-    deal.classList.toggle('single', n === 1);
+    sizeDeal(n);
     const cards = chosen.map((g, i) => {
       const b = makeCard(state.picked[first + i], first + i, i, 'ready');
       b.setAttribute('aria-label', `Lật thẻ ${i + 1}`);
@@ -1309,13 +1436,15 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     $('pullNSub').textContent = `${m} nhóm cùng lúc`;
     $('packWrap').classList.toggle('clickable', ok);
     $('toEndBtn').hidden = !(state.scene === 'gacha' && phase === 'idle' && state.picked.length && allFinished() && !moreToPlay());
+    $('setupBar').hidden = !(phase === 'idle' && !state.picked.length);
+    renderSetup();
   }
 
   /* ---------- Question ---------- */
   function setupQuestion() {
     const pi = state.active, p = state.picked[pi];
     if (!p || p.q == null) return;
-    const qi = p.q, q = QUESTIONS[qi];
+    const qi = p.q, q = getQ(qi);
     qLive = { pi, qi, locked: p.result != null };
     const panel = $('qPanel');
     panel.classList.toggle('special', q.type === 'open');
@@ -1341,6 +1470,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       });
     }
     $('judge').hidden = q.type !== 'open';
+    renderHintList(q);
     $('hintPanel').hidden = true;
     $('hintBtn').textContent = 'Xem gợi ý đáp án';
     $('qResult').hidden = true;
@@ -1354,10 +1484,35 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       const f = q.type === 'mc' ? document.querySelector('.opt:not(:disabled)') : $('passBtn');
       if (f) f.focus({ preventScroll: true });
     }
+    fitQuestion();
+  }
+  function renderHintList(q) {
+    const ul = $('hintList');
+    ul.innerHTML = '';
+    const lines = q.type === 'open' && q.hint && q.hint.length ? q.hint : ['Chưa có gợi ý. Người dẫn tự đánh giá câu trả lời.'];
+    lines.forEach(line => {
+      const li = document.createElement('li');
+      const cut = line.indexOf(':');
+      if (cut > 0 && cut < 40) {
+        const b = document.createElement('b');
+        b.textContent = line.slice(0, cut + 1);
+        li.append(b, ' ' + line.slice(cut + 1).trim());
+      } else li.textContent = line;
+      ul.appendChild(li);
+    });
+  }
+  /* Long custom questions shrink their type until the panel fits the frame, so nothing ever scrolls. */
+  function fitQuestion() {
+    const panel = $('qPanel'), scene = $('sceneQuestion');
+    if (scene.hidden) return;
+    let k = 1;
+    panel.style.setProperty('--qs', '1');
+    const room = () => scene.clientHeight - 6;
+    while (panel.offsetHeight > room() && k > .56) { k -= .06; panel.style.setProperty('--qs', k.toFixed(2)); }
   }
   function answer(k) {
     if (!qLive || qLive.locked || busy) return;
-    const live = qLive, q = QUESTIONS[live.qi], p = state.picked[live.pi];
+    const live = qLive, q = getQ(live.qi), p = state.picked[live.pi];
     if (q.type !== 'mc' || p.result != null || p.wrong.includes(k)) return;
     ensureAudio();
     live.locked = true;
@@ -1368,7 +1523,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     drumroll(1.5);
     setTimeout(() => {
       if (qLive !== live) return;
-      if (k === ansIndex(live.qi)) { p.choice = k; finish(true, live); }
+      if (k === q.ans) { p.choice = k; finish(true, live); }
       else wrongAttempt(k, live);
     }, reduced ? 300 : 1600);
   }
@@ -1393,13 +1548,13 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     fb.style.animation = 'none'; void fb.offsetWidth; fb.style.animation = '';
     renderHUD(); renderDrawer();
     live.locked = false;
-    startTimer(QUESTIONS[live.qi].time);
+    startTimer(getQ(live.qi).time);
     const next = document.querySelector('.opt:not(:disabled)');
     if (next) next.focus({ preventScroll: true });
   }
   function judgeOpen(ok) {
     if (!qLive || qLive.locked || busy) return;
-    if (QUESTIONS[qLive.qi].type !== 'open') return;
+    if (getQ(qLive.qi).type !== 'open') return;
     ensureAudio();
     qLive.locked = true;
     const p = state.picked[qLive.pi];
@@ -1420,13 +1575,13 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     return moreToPlay() ? 'Mở gói tiếp' : 'Lên bục vinh danh';
   }
   function showAnswered(fresh) {
-    const live = qLive, p = state.picked[live.pi], q = QUESTIONS[live.qi], ok = p.result === 'right';
+    const live = qLive, p = state.picked[live.pi], q = getQ(live.qi), ok = p.result === 'right';
     live.locked = true;
     $('timerWrap').hidden = true;
     $('qKeys').hidden = true;
     $('qFeedback').hidden = true;
     if (q.type === 'mc') {
-      const a = ansIndex(live.qi);
+      const a = q.ans;
       q.opts.forEach((o, k) => {
         const b = $(`opt-${k}`);
         b.disabled = true;
@@ -1439,6 +1594,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       $('judge').hidden = true;
       $('hintPanel').hidden = false;
     }
+    requestAnimationFrame(fitQuestion);
     setGifts($('qGifts'), p.points, fresh && !ok ? p.points : -1);
     const r = $('qResult');
     r.classList.toggle('good', ok);
@@ -1474,7 +1630,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     if (!p || p.result == null) return;
     let label;
     if (pendingIndex() >= 0) { state.scene = 'gacha'; label = 'Chọn nhóm tiếp theo'; }
-    else if (moreToPlay()) { state.scene = 'gacha'; label = 'Gói Định Mệnh'; }
+    else if (moreToPlay()) { state.scene = 'gacha'; label = 'Gói May Mắn'; }
     else { state.scene = 'end'; label = 'Bục vinh danh'; }
     save();
     curtainTo(renderScene, label);
@@ -1545,6 +1701,9 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
   function renderHUD() {
     const board = $('board');
     board.innerHTML = '';
+    const cols = state.target <= 5 ? state.target : Math.ceil(state.target / 2);
+    board.style.setProperty('--cols', Math.max(1, cols));
+    board.classList.toggle('many', state.target > 5);
     for (let i = 0; i < state.target; i++) {
       const p = hidden.has(i) ? null : state.picked[i];
       const li = document.createElement('li');
@@ -1593,15 +1752,27 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 
   /* ---------- Settings drawer ---------- */
   const setupLocked = () => phase === 'opening' || phase === 'flip' || busy;
-  function renderDrawer() {
-    $('groupCount').textContent = state.groupCount;
-    $('targetCount').textContent = state.target;
-    const maxPicked = Math.max(0, ...state.picked.map(p => p.g));
+  /* Steppers live in two places (setup bar and drawer); both read the same state. */
+  function renderSetup() {
     const lock = setupLocked();
-    $('groupsMinus').disabled = lock || state.groupCount <= Math.max(2, maxPicked);
-    $('groupsPlus').disabled = lock || state.groupCount >= 12;
-    $('targetMinus').disabled = lock || state.target <= Math.max(1, state.picked.length);
-    $('targetPlus').disabled = lock || state.target >= Math.min(MAXQ, state.groupCount);
+    const maxPicked = Math.max(0, ...state.picked.map(p => p.g));
+    const mT = maxTarget();
+    document.querySelectorAll('[data-out="groups"]').forEach(o => { o.textContent = state.groupCount; });
+    document.querySelectorAll('[data-out="target"]').forEach(o => { o.textContent = state.target; });
+    document.querySelectorAll('[data-step="groups"][data-d="-1"]').forEach(b => { b.disabled = lock || state.groupCount <= Math.max(2, maxPicked); });
+    document.querySelectorAll('[data-step="groups"][data-d="1"]').forEach(b => { b.disabled = lock || state.groupCount >= MAX_GROUPS; });
+    document.querySelectorAll('[data-step="target"][data-d="-1"]').forEach(b => { b.disabled = lock || state.target <= Math.max(1, state.picked.length); });
+    document.querySelectorAll('[data-step="target"][data-d="1"]').forEach(b => { b.disabled = lock || state.target >= mT; });
+    const nq = state.bank.mc.length + 1;
+    $('lblTarget').textContent = state.target >= mT && mT < Math.min(MAX_TARGET, state.groupCount)
+      ? `Số nhóm được gọi lên · đang có ${nq} câu hỏi nên gọi tối đa ${mT} nhóm, thêm câu hỏi để gọi thêm`
+      : `Số nhóm được gọi lên · tối đa ${mT} nhóm`;
+    $('sbQuestions').textContent = `Câu hỏi: ${nq}`;
+  }
+  function renderDrawer() {
+    renderSetup();
+    renderQuestions();
+    const lock = setupLocked();
     const tags = $('tags');
     tags.innerHTML = '';
     for (let g = 1; g <= state.groupCount; g++) {
@@ -1630,6 +1801,100 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     sb.textContent = `Âm thanh: ${state.sound ? 'Bật' : 'Tắt'}`;
     sb.setAttribute('aria-pressed', String(state.sound));
   }
+  /* ---------- Question editor ---------- */
+  let editing = null, delArmed = false, restoreArmed = false;
+  const questionsLocked = () => state.picked.length > 0 || setupLocked();
+  function renderQuestions() {
+    const lock = questionsLocked();
+    $('qLock').hidden = !state.picked.length;
+    const list = $('qList');
+    list.innerHTML = '';
+    const item = (num, q, id, special) => {
+      const li = document.createElement('li');
+      li.className = 'qitem' + (special ? ' special' : '');
+      const n = document.createElement('span'); n.className = 'qi-num'; n.textContent = num;
+      const t = document.createElement('span'); t.className = 'qi-text'; t.textContent = q.text;
+      const m = document.createElement('span'); m.className = 'qi-meta';
+      m.textContent = special ? `Câu mở · ${q.time} giây · luôn cho nhóm cuối` : `Đáp án đúng: ${'ABCD'[q.ans]} · ${q.time} giây`;
+      const e = document.createElement('button'); e.type = 'button'; e.className = 'btn sm'; e.dataset.edit = id; e.textContent = 'Sửa'; e.disabled = lock;
+      li.append(n, t, e, m);
+      list.appendChild(li);
+    };
+    state.bank.mc.forEach((q, i) => item(`Câu ${i + 1}`, q, q.id, false));
+    item('Đặc biệt', state.bank.special, SPECIAL, true);
+    $('qAdd').disabled = lock || state.bank.mc.length >= MAX_MC;
+    $('qRestore').disabled = lock;
+    $('qRestore').textContent = restoreArmed ? 'Bấm lần nữa để thay toàn bộ' : 'Dùng lại bộ câu mặc định';
+    if (lock && editing) closeQForm();
+  }
+  function openQForm(id) {
+    if (questionsLocked()) return;
+    const isNew = id == null, special = id === SPECIAL;
+    const q = isNew ? { type: 'mc', text: '', opts: ['', '', '', ''], ans: -1, time: 15 } : getQ(id);
+    if (!q) return;
+    editing = { id: isNew ? null : id, special };
+    delArmed = false;
+    const idx = state.bank.mc.findIndex(m => m.id === id);
+    $('qFormTitle').textContent = isNew ? 'Thêm câu hỏi ABCD' : special ? 'Sửa câu hỏi đặc biệt' : `Sửa câu ${idx + 1}`;
+    $('fText').value = q.text;
+    $('fOptsWrap').hidden = special;
+    $('fHintWrap').hidden = !special;
+    for (let k = 0; k < 4; k++) {
+      $('fOpt' + k).value = special ? '' : q.opts[k];
+      $('fAns' + k).checked = !special && q.ans === k;
+    }
+    $('fHint').value = special ? (q.hint || []).join('\n') : '';
+    $('fTime').value = q.time;
+    $('fDelete').hidden = isNew || special;
+    $('fDelete').textContent = 'Xóa câu này';
+    $('fErr').hidden = true;
+    $('qForm').hidden = false;
+    $('qForm').scrollIntoView({ block: 'nearest' });
+    $('fText').focus({ preventScroll: true });
+  }
+  function closeQForm() {
+    editing = null; delArmed = false;
+    $('qForm').hidden = true;
+  }
+  function formError(msg, el) {
+    const e = $('fErr');
+    e.textContent = msg; e.hidden = false;
+    if (el) el.focus();
+  }
+  function saveQForm() {
+    if (!editing || questionsLocked()) return;
+    const text = txt($('fText').value, 600);
+    if (!text) return formError('Bạn chưa nhập nội dung câu hỏi.', $('fText'));
+    const time = clampInt($('fTime').value, 5, 300, editing.special ? 60 : 15);
+    if (editing.special) {
+      const hint = $('fHint').value.split('\n').map(h => txt(h, 400)).filter(Boolean).slice(0, 12);
+      state.bank.special = { id: SPECIAL, type: 'open', time, text, hint };
+    } else {
+      const opts = [0, 1, 2, 3].map(k => txt($('fOpt' + k).value, 200));
+      const miss = opts.findIndex(o => !o);
+      if (miss >= 0) return formError(`Đáp án ${'ABCD'[miss]} đang để trống.`, $('fOpt' + miss));
+      const ansEl = document.querySelector('input[name="fAns"]:checked');
+      if (!ansEl) return formError('Bấm vào vòng tròn cạnh đáp án đúng.', $('fAns0'));
+      const q = { id: editing.id || `q${Date.now().toString(36)}${randInt(1e4)}`, type: 'mc', time, ans: Number(ansEl.value), text, opts };
+      const i = state.bank.mc.findIndex(m => m.id === editing.id);
+      if (i >= 0) state.bank.mc[i] = q; else state.bank.mc.push(q);
+    }
+    closeQForm();
+    afterBankChange();
+  }
+  function deleteQ() {
+    if (!editing || editing.special || !editing.id || questionsLocked()) return;
+    if (!delArmed) { delArmed = true; $('fDelete').textContent = 'Bấm lần nữa để xóa'; return; }
+    state.bank.mc = state.bank.mc.filter(m => m.id !== editing.id);
+    closeQForm();
+    afterBankChange();
+  }
+  function afterBankChange() {
+    state.target = Math.max(state.picked.length, Math.min(state.target, maxTarget()));
+    save();
+    renderDrawer(); renderHUD();
+    if (visibleScene === 'gacha' && phase === 'idle') renderStatus();
+  }
   function openDrawer() {
     renderDrawer();
     $('drawerWrap').hidden = false;
@@ -1637,6 +1902,8 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     $('drawerClose').focus({ preventScroll: true });
   }
   function closeDrawer() {
+    closeQForm();
+    restoreArmed = false;
     $('drawerWrap').hidden = true;
     drawerOpen = false;
     $('confirm').hidden = true; $('resetBtn').hidden = false;
@@ -1685,6 +1952,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       const h = $('hintPanel');
       h.hidden = !h.hidden;
       $('hintBtn').textContent = h.hidden ? 'Xem gợi ý đáp án' : 'Ẩn gợi ý';
+      fitQuestion();
     });
     $('passBtn').addEventListener('click', () => judgeOpen(true));
     $('failBtn').addEventListener('click', () => judgeOpen(false));
@@ -1711,11 +1979,11 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       const d = Number(b.dataset.d);
       if (b.dataset.step === 'groups') {
         const maxPicked = Math.max(0, ...state.picked.map(p => p.g));
-        state.groupCount = Math.min(12, Math.max(2, maxPicked, state.groupCount + d));
+        state.groupCount = Math.min(MAX_GROUPS, Math.max(2, maxPicked, state.groupCount + d));
         state.excluded = state.excluded.filter(g => g <= state.groupCount);
-        state.target = Math.min(state.target, Math.max(state.picked.length, Math.min(MAXQ, state.groupCount)));
+        state.target = Math.max(state.picked.length, Math.min(state.target, maxTarget()));
       } else {
-        state.target = Math.min(Math.min(MAXQ, state.groupCount), Math.max(1, state.picked.length, state.target + d));
+        state.target = Math.min(maxTarget(), Math.max(1, state.picked.length, state.target + d));
       }
       if (visibleScene === 'gacha' && phase === 'idle') renderStatus();
       renderHUD(); renderDrawer(); save();
@@ -1737,6 +2005,20 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       const again = $(`s${act}-${i}`), other = $(`s${act === 'plus' ? 'minus' : 'plus'}-${i}`);
       if (again && !again.disabled) again.focus(); else if (other && !other.disabled) other.focus();
     });
+    $('sbQuestions').addEventListener('click', () => { openDrawer(); $('qSection').scrollIntoView({ block: 'start' }); });
+    $('qList').addEventListener('click', e => { const b = e.target.closest('button[data-edit]'); if (b && !b.disabled) openQForm(b.dataset.edit); });
+    $('qAdd').addEventListener('click', () => openQForm(null));
+    $('qForm').addEventListener('submit', e => { e.preventDefault(); saveQForm(); });
+    $('fCancel').addEventListener('click', () => { closeQForm(); $('qAdd').focus(); });
+    $('fDelete').addEventListener('click', deleteQ);
+    $('qRestore').addEventListener('click', () => {
+      if (questionsLocked()) return;
+      if (!restoreArmed) { restoreArmed = true; renderQuestions(); return; }
+      restoreArmed = false;
+      state.bank = cloneBank(DEFAULT_BANK);
+      closeQForm();
+      afterBankChange();
+    });
     $('resetBtn').addEventListener('click', () => { $('confirm').hidden = false; $('resetBtn').hidden = true; $('resetNo').focus(); });
     $('resetNo').addEventListener('click', () => { $('confirm').hidden = true; $('resetBtn').hidden = false; $('resetBtn').focus(); });
     $('resetYes').addEventListener('click', () => {
@@ -1747,7 +2029,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
       state = defaults(state);
       save();
       closeDrawer();
-      curtainTo(renderScene, 'Gói Định Mệnh');
+      curtainTo(renderScene, 'Gói May Mắn');
     });
 
     document.addEventListener('keydown', e => {
@@ -1765,18 +2047,35 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
         } else if (phase === 'flip') {
           if (isNext || ((isSpace || k === 'Enter') && onBody)) { e.preventDefault(); flipNext(); }
         } else if (phase === 'hand') {
-          if (/^[1-4]$/.test(k)) { e.preventDefault(); openQuestionFor(Number(k) - 1); }
+          if (/^[1-9]$/.test(k)) { e.preventDefault(); const c = $('deal').children[Number(k) - 1]; if (c && c.classList.contains('pickable')) openQuestionFor(Number(c.dataset.p)); }
           else if (isNext || ((isSpace || k === 'Enter') && onBody)) { e.preventDefault(); openNextPending(); }
         } else if (isNext || isSpace) e.preventDefault();
       } else if (state.scene === 'question' && qLive) {
         const lk = k.toLowerCase();
         const p = state.picked[qLive.pi];
-        if (!qLive.locked && QUESTIONS[qLive.qi].type === 'mc' && ['a', 'b', 'c', 'd'].includes(lk)) { e.preventDefault(); answer('abcd'.indexOf(lk)); }
+        if (!qLive.locked && getQ(qLive.qi).type === 'mc' && ['a', 'b', 'c', 'd'].includes(lk)) { e.preventDefault(); answer('abcd'.indexOf(lk)); }
         else if (p && p.result != null && (isNext || (isSpace && onBody))) { e.preventDefault(); nextStep(); }
       }
     });
 
-    window.addEventListener('resize', resizeFx);
+    window.addEventListener('resize', () => {
+      resizeFx(); fitFrame();
+      const n = $('deal').children.length;
+      if (n) sizeDeal(n);
+      if (visibleScene === 'question') fitQuestion();
+    });
+  }
+
+  /* The whole game is one 1440×810 (or larger) logical frame scaled to the window: same layout on every screen, never a scrollbar. */
+  let frameScale = 1;
+  function fitFrame() {
+    const W = window.innerWidth || BASE_W, H = window.innerHeight || BASE_H;
+    const sc = Math.min(W / BASE_W, H / BASE_H);
+    frameScale = sc;
+    const app = $('app');
+    app.style.width = (W / sc) + 'px';
+    app.style.height = (H / sc) + 'px';
+    app.style.transform = `scale(${sc})`;
   }
 
   let booted = false;
@@ -1789,6 +2088,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     bind();
     initMotes();
     resizeFx();
+    fitFrame();
     renderScene();
     requestAnimationFrame(loop);
   }
