@@ -64,6 +64,9 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none !important}
+/* Playfair defaults to old-style digits and the font shorthand resets numeric variants, so lining figures are forced everywhere */
+*,*::before,*::after{font-variant-numeric:lining-nums !important}
+.slot-pts,.timer-num,.stepper output,.score-ctrl output{font-variant-numeric:lining-nums tabular-nums !important}
 html{height:100%;overflow:hidden}
 body{height:100%;margin:0;overflow:hidden;display:flex;flex-direction:column;background:var(--night);color:var(--cream);font-family:var(--font-body);font-size:16px;line-height:1.5;overflow-x:hidden;font-variant-numeric:lining-nums}
 :focus-visible{outline:3px solid var(--glow);outline-offset:3px}
@@ -156,7 +159,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
 .pk-t1{font:800 17px var(--font-body);letter-spacing:7px;fill:var(--cream)}
 .pk-t2{font:900 38px var(--font-display);fill:url(#pkGold);stroke:var(--pack-deep);stroke-width:1.4px;paint-order:stroke}
 .pk-t3{font:800 15px var(--font-body);letter-spacing:5px;fill:var(--glow)}
-.pk-t4{font:600 10.5px var(--font-body);fill:var(--cream);opacity:.85}
+.pk-t4{font:600 10.5px var(--font-body);fill:var(--cream)}
 .pk-q{font:900 22px var(--font-display);fill:var(--pack-deep)}
 .pk-holo{mix-blend-mode:soft-light;opacity:.55;animation:pkholo 6s ease-in-out infinite alternate}
 @keyframes pkholo{from{opacity:.3}to{opacity:.7}}
@@ -903,6 +906,7 @@ html[data-scene="gacha"] .hall,html[data-scene="end"] .hall{opacity:.5}
     <path d="${star5(150, 240, 22)}" fill="url(#pkGold)" style="stroke:var(--pack-deep)" stroke-width="2" stroke-linejoin="round"/>
     <text class="pk-q" x="150" y="292" text-anchor="middle">?</text>
     ${sparks}
+    <rect x="0" y="370" width="300" height="50" fill="url(#pkBand)"/>
     <rect x="20" y="366" width="260" height="2" fill="url(#pkGoldH)"/>
     <text class="pk-t3" x="150" y="391" text-anchor="middle">GÓI THẺ NHÓM</text>
     <text class="pk-t4" x="150" y="409" text-anchor="middle">Mỗi thẻ là một nhóm lên sân khấu</text>
